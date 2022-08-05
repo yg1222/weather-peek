@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div>
+        <div class="search-card">
+            <form action="/search" method="post">
+                <div class="search-div">
+                    <input type="text" class="search-bar" name="city_query" placeholder="Search City" autofocus="true" required checked>
+                    {% for x in units %}
+                        <input type="radio" class="unit-selector" name="unit" value="{{x}}" required> {{x}}
+                    {% endfor %}
+                    <button type="submit"><i class="search-btn fa fa-search"></i></button>
+                </div>
+            </form>
+            <div class="weather-div">
+                <h2 class="city">                   
+                    {{ city }}, {{country}}             
+                </h2>
+                <div class="temperature data" name="temperature"><h1>{{ temperature }} ° {{ temp_unit }}</h1></div>
+                <img src={{ icon_url }} alt="image" class="icon">
+                <div class="description data" name="description">Weather description: {{ description }}</div>
+                <div class="humidity data" name="humidity">Humidity: {{ humidity }}%</div>
+                <div class="wind data" name="wind">Wind speed: {{ wind }} {{ wind_unit }}</div>
+                <div class="visibility data" name="visibility">Visibility: {{ visibility }} {{ vis_unit }}</div>
+                <div class="sunrise data" name="humidity">Today's Sunrise: {{ sunrise }}</div>
+                <div class="sunset data" name="humidity">Today's Sunset: {{ sunset }}</div>
+                <div class="now data" name="now">Time Stamp (Search area): {{ now }}</div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endblock %}
