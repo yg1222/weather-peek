@@ -6,10 +6,11 @@ import time
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
 app = Flask(__name__)
 
-def configure():
-    load_dotenv()
+
 
 api_key = os.getenv("api_key")
 id = os.getenv("id")
@@ -25,7 +26,7 @@ def index():
 def search():
     # Location processing for geolocation
     city_query = str(request.form.get("city_query"))    
-    location_data = requests.get("http://api.openweathermap.org/geo/1.0/direct?appid=" + api_key + "&limit=1&q=" + city_query)
+    location_data = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?appid={api_key}&limit=1&q={city_query}")
     unit = str(request.form.get("unit"))
     print("Got unit: " + unit)
 
