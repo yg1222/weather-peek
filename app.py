@@ -10,8 +10,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-
-
 api_key = os.getenv("api_key")
 id = os.getenv("id")
 
