@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # api_key = os.getenv("api_key")
-id = "524901"
+# id = os.getenv("id")
 
 UNITS = ["metric", "imperial"]
 
