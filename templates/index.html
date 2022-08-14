@@ -6,10 +6,23 @@
             <form action="/search" method="post">
                 <div class="search-div">
                     <input type="text" class="search-bar" name="city_query" placeholder="Search City" autofocus="true" required>
-                    {% for x in units %}
-                        <input type="radio" class="unit-selector" name="unit" value="{{x}}" required> {{x}}
-                    {% endfor %}
-                    <button type="submit"><i class="search-btn fa fa-search"></i></button>
+                    <table>  
+                        <tr>                      
+                            {% for x in units %}
+                            
+                                <input type="radio" class="unit-selector" name="unit" value="{{x}}" required>  {{x}}  
+                                <span>,  </span>
+                            
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <button type="submit"><i class="search-btn fa fa-search"></i></button>
+                        </tr>
+
+                    </table>
+                    
+                    
+                    
                 </div>
             </form>           
         </div>
