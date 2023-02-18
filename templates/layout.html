@@ -33,6 +33,17 @@
         </nav>
       </header>
  <main>
+  
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <p>{{msg}}</p>
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  
     {% block body %}{% endblock %}
  </main>
     

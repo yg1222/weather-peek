@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, flash
 import requests
 import json
 from datetime import datetime
@@ -23,14 +23,21 @@ def index():
 @app.route("/search", methods=['GET', 'POST'])
 def search():
     # Location processing for geolocation
-    city_query = str(request.form.get("city_query"))    
+    city_query = str(request.form.get("city_query"))  
     location_data = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?appid={api_key}&limit=1&q={city_query}")
+    
     unit = str(request.form.get("unit"))
     print("Got unit: " + unit)
 
     # Returns a list of dictionaries. Only one element in the list (0)
     location_data_dict = json.loads(location_data.content)
-    location_data_dict = location_data_dict[0]
+    # Try city query as it may fail due to an invalid user input
+    try:  
+        location_data_dict = location_data_dict[0]
+    except:
+        print("Unable to find the city" )
+        flash("Unable to find the city. Please try again.")
+        return render_template("index.html", units=UNITS)
 
     # Location data variables
     lon = str(location_data_dict["lon"])
@@ -115,8 +122,10 @@ def search():
     country=country, icon_url=icon_url)
 
 
+app.secret_key = "secret_things"
 if __name__ == '__main__':
     app.run(debug=True)
+
 
     # FUTURE IMPLEMENTATIONS
     # Options for 5 day forcast
